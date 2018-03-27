@@ -7,7 +7,8 @@
 
 (defonce server (atom nil))
 
-;; from < day < to
+;;-- main routine part
+;; defined: from < taget-day < to
 (def zodiacs
   [{:zodiac "Aries"       :from "--03-20", :to "--04-21"},
    {:zodiac "Taurus"      :from "--04-20", :to "--05-22"},
@@ -22,14 +23,18 @@
    {:zodiac "Aquarius"    :from "--01-20", :to "--02-20"},
    {:zodiac "Pisces"      :from "--02-19", :to "--03-21"}])
 
-(defn zodiac- [d z]
+(defn zodiac- [^java.time.MonthDay d z]
+  "Find zodiac of d, and return the zodiac from 'zodiacs' map."
   (if (and (->> (:from z) t/month-day (t/after? d))
            (->> (:to z) t/month-day (t/before? d)))
     (:zodiac z)))
 
-(defn get-zodiac [date]
-  "Return the zodiac of date"
-  nil)
+(defn get-zodiac [^java.time.MonthDay d]
+  "Return the zodiac of d"
+  (if (t/month-day? d)
+    (first (filter some? (map #(zodiac- d %) zodiacs)))))
+
+;; web-service part
 (defn root-handler [req]
   nil)
 
