@@ -7,24 +7,29 @@
 
 (defonce server (atom nil))
 
+;; from < day < to
 (def zodiacs
-  [{:zodiac "Aries"       :range {:from "0321", :to "0420"}},
-   {:zodiac "Taurus"      :range {:from "0421", :to "0521"}},
-   {:zodiac "Gemini"      :range {:from "0522", :to "0621"}},
-   {:zodiac "Cancer"      :range {:from "0622", :to "0723"}},
-   {:zodiac "Leo"         :range {:from "0724", :to "0823"}},
-   {:zodiac "Virgo"       :range {:from "0824", :to "0923"}},
-   {:zodiac "Libra"       :range {:from "0924", :to "1023"}},
-   {:zodiac "Scorpio"     :range {:from "1024", :to "1122"}},
-   {:zodiac "Sagittarius" :range {:from "1123", :to "1222"}},
-   {:zodiac "Capricorn"   :range {:from "1223", :to "0120"}},
-   {:zodiac "Aquarius"    :range {:from "0121", :to "0219"}},
-   {:zodiac "Pisces"      :range {:from "0220", :to "0320"}}])
+  [{:zodiac "Aries"       :from "--03-20", :to "--04-21"},
+   {:zodiac "Taurus"      :from "--04-20", :to "--05-22"},
+   {:zodiac "Gemini"      :from "--05-21", :to "--06-22"},
+   {:zodiac "Cancer"      :from "--06-21", :to "--07-24"},
+   {:zodiac "Leo"         :from "--07-23", :to "--08-24"},
+   {:zodiac "Virgo"       :from "--08-23", :to "--09-24"},
+   {:zodiac "Libra"       :from "--09-23", :to "--10-24"},
+   {:zodiac "Scorpio"     :from "--10-23", :to "--11-23"},
+   {:zodiac "Sagittarius" :from "--11-22", :to "--12-23"},
+   {:zodiac "Capricorn"   :from "--12-22", :to "--01-21"},
+   {:zodiac "Aquarius"    :from "--01-20", :to "--02-20"},
+   {:zodiac "Pisces"      :from "--02-19", :to "--03-21"}])
+
+(defn zodiac- [d z]
+  (if (and (->> (:from z) t/month-day (t/after? d))
+           (->> (:to z) t/month-day (t/before? d)))
+    (:zodiac z)))
 
 (defn get-zodiac [date]
   "Return the zodiac of date"
   nil)
-
 (defn root-handler [req]
   nil)
 
