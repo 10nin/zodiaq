@@ -6,4 +6,4 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [ring "1.6.3"]
                  [compojure "1.6.0"]
-                 [clj-time "0.14.2"]])
+                 [clojure.java-time "0.3.1"]])
