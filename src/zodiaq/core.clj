@@ -33,6 +33,12 @@
   (if (t/month-day? d)
     (first (filter some? (map #(zodiac- d %) zodiacs)))))
 
+(defn date-format? [^String d]
+  "Valid target format of d"
+  (try
+    (t/local-date "yyyyMMdd" d) true
+    (catch Exception _ false)))
+
 ;; web-service part
 (defn root-handler [req]
   nil)
