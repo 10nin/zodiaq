@@ -25,8 +25,7 @@
 
 (defn zodiac- [^java.time.MonthDay d z]
   "Find zodiac of d, and return the zodiac from 'zodiacs' map."
-  (if (and (->> (:from z) t/month-day (t/after? d))
-           (->> (:to z) t/month-day (t/before? d)))
+  (if (t/before? (t/month-day (:from z)) d (t/month-day (:to z)))
     (:zodiac z)))
 
 (defn get-zodiac [^java.time.MonthDay d]
