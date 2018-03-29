@@ -40,8 +40,18 @@
     (catch Exception _ false)))
 
 ;; web-service part
+(defn html [res]
+  (assoc res :headers {"Content-Type" "text/html; charset=utf-8"}))
+
+(defn root-view [req]
+  "<h1>Zodiaq how to use...</h1>
+  <p>call ://uri/zodiac/yyyymmdd (yyyymmdd like to 20180301) <br>
+  it return the zodiac of yyyymmdd day.</p>")
+
 (defn root-handler [req]
-  nil)
+  (-> (root-view req)
+      res/response
+      html))
 
 (defn zodiac-handler [req]
   nil)
