@@ -48,13 +48,21 @@
   <p>call ://uri/zodiac/yyyymmdd (yyyymmdd like to 20180301) <br>
   it return the zodiac of yyyymmdd day.</p>")
 
+(defn zodiac-view [req]
+  (let [d (:d req)]
+    (if (date-format? d)
+      (get-zodiac (t/month-day d))
+      (str d "can't convert to zodiac."))))
+
 (defn root-handler [req]
   (-> (root-view req)
       res/response
       html))
 
 (defn zodiac-handler [req]
-  nil)
+  (-> (zodiac-view req)
+      res/response
+      html))
 
 (defroutes handlers
   (GET "/" req root-handler)
