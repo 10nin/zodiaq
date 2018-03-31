@@ -49,10 +49,9 @@
   it return the zodiac of yyyymmdd day.</p>")
 
 (defn zodiac-view [req]
-  (let [d (:d req)]
-    (if (date-format? d)
-      (get-zodiac (t/month-day d))
-      (str d "can't convert to zodiac."))))
+  (if (date-format? req)
+    (get-zodiac (t/month-day (t/local-date "yyyyMMdd" req)))
+    (str req " is can't convert to zodiac.")))
 
 (defn root-handler [req]
   (-> (root-view req)
@@ -66,7 +65,7 @@
 
 (defroutes handlers
   (GET "/" req root-handler)
-  (GET ["/zodiac/:d" :d #"\d{4}\d{2}\d{2}"] req zodiac-handler)
+  (GET "/zodiac/:d" [d] (zodiac-handler d))
   (route/not-found "<h1>HTTP 404 : Not found</h1>"))
 
 (defn match-route [uri]
