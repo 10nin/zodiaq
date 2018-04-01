@@ -6,4 +6,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [ring "1.6.3"]
                  [compojure "1.6.0"]
-                 [clojure.java-time "0.3.1"]])
+                 [clojure.java-time "0.3.1"]]
+  :uberjar-name "zodiaq.jar"
+  :profiles
+  {:uberjar {:aot :all
+             :main zodiaq.main}})
