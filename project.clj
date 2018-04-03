@@ -10,4 +10,6 @@
   :uberjar-name "zodiaq.jar"
   :profiles
   {:uberjar {:aot :all
-             :main zodiaq.main}})
+             :main zodiaq.main}}
+  :min-lein-version "2.5.3")
+
